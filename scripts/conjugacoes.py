@@ -10,7 +10,7 @@ with open("verbos.txt") as f:
 
 for l, i in enumerate(verbs):
 
-    html = requests.get("https://www.conjugacao.com.br/verbo-" + i).content
+    html = requests.get(f"https://www.conjugacao.com.br/verbo-{i}").content
 
     soup = BeautifulSoup(html, 'html.parser')
 
@@ -18,7 +18,6 @@ for l, i in enumerate(verbs):
 
     print(l)
 
-    for j in conj:
-        with open("conjugacoes.txt", "a") as file:
+    with open("conjugacoes.txt", "a") as file:
+        for j in conj:
             file.write(j.text + '\n')
-            file.close()

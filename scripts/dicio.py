@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 for i in range(1, 1611):
-    link = "https://www.dicio.com.br/palavras-mais-buscadas/" + str(i) + "/"
+    link = f"https://www.dicio.com.br/palavras-mais-buscadas/{i}/"
     html = requests.get(link).content
 
     soup = BeautifulSoup(html, 'html.parser')
@@ -11,8 +11,7 @@ for i in range(1, 1611):
 
     print(i)
 
-    for li in words.find_all("li"):
-        a = li.find("a")
-        with open("dicio.txt", "a") as file:
+    with open("dicio.txt", "a") as file:
+        for li in words.find_all("li"):
+            a = li.find("a")
             file.write(a.text + '\n')
-            file.close()
